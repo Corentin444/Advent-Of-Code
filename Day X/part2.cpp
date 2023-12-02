@@ -4,16 +4,17 @@
 #include <string>
 #include <regex>
 #include <map>
+#include <algorithm>
+
+#include "../utils.h"
 
 int main()
 {
-    std::ifstream infile("input.txt");
-    std::string line;
     int ans = 0;
     
-    while (std::getline(infile, line))
+    for(std::string line : readLines("input.txt"))
     {
-        
+        std::vector<std::string> splited = split(line, " ");
     }
 
     std::cout << ans;

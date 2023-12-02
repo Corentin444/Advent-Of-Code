@@ -4,13 +4,13 @@
 #include <string>
 #include <map>
 
+#include "../utils.h"
+
 int main()
 {
-    std::ifstream infile("input.txt");
-    std::string line;
     int sum = 0;
     std::vector<int> numbers;
-    while (std::getline(infile, line))
+    for(std::string line : readLines("input.txt"))
     {
         for (char c : line)
         {
