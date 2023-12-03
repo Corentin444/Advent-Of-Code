@@ -47,3 +47,22 @@ std::vector<std::string> readLines(std::string fileName)
     }
     return lines;
 }
+
+// Read chars from a file
+std::vector<std::vector<char>> readChars(std::string fileName)
+{
+    std::vector<std::vector<char>> chars = {};
+    std::ifstream infile(fileName);
+    std::string line;
+    int i = 0;
+    while (std::getline(infile, line))
+    {
+        chars.push_back({});
+        for (char c : line)
+        {
+            chars[i].push_back(c);
+        }
+        i++;
+    }
+    return chars;
+}
