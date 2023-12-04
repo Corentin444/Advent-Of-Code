@@ -14,6 +14,7 @@ int main()
     int ans = 0;
     std::vector<std::vector<char>> grid = readChars("input.txt");
     std::vector<std::vector<int>> dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    
     for (size_t x = 0; x < grid.size(); x++)
     {
         std::string n = "";
@@ -48,6 +49,7 @@ int main()
                 symbol = false;
             }
         }
+
         if (n != "" && symbol)
         {
             ans += std::stoi(n);

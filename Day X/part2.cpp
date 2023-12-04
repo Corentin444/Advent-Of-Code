@@ -15,7 +15,7 @@ int main()
 
     for (std::string line : readLines("input.txt"))
     {
-        std::vector<std::string> splited = split(line, " ");
+        std::vector<std::string> splited = splitByString(line, " ");
     }
 
     std::vector<std::vector<char>> grid = readChars("input.txt");

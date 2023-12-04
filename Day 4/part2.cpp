@@ -22,26 +22,27 @@ int main()
 
     for (std::string line : readLines("input.txt"))
     {
-        std::string numbers = split(split(line, ": ")[1], "|")[0];
-        numbers = numbers.substr(1, numbers.size() - 2);
-        std::string winnings = split(split(line, ": ")[1], "|")[1];
-        std::vector<int> numbersI = {};
-        std::vector<int> winningsI = {};
-        int winningNumbers = 0;
-        for (std::string number : split(numbers, " "))
+        line = splitByString(line, ": ")[1];
+        std::string numbersS = splitByString(line, "|")[0];
+        std::string winningsS = splitByString(line, "|")[1];
+        std::vector<int> numbersV = {};
+        std::vector<int> winningsV = {};
+
+        for (std::string numberS : getRegexMatches(numbersS, "\\d+"))
         {
-            if (number != "" && number != " ")
-                numbersI.push_back(stoi(number));
-        }
-        for (std::string winning : split(winnings, " "))
-        {
-            if (winning != "" && winning != " ")
-                winningsI.push_back(stoi(winning));
+            numbersV.push_back(stoi(numberS));
         }
 
-        for (int n : numbersI)
+        for (std::string winningS : getRegexMatches(winningsS, "\\d+"))
         {
-            if (std::find(winningsI.begin(), winningsI.end(), n) != winningsI.end())
+            winningsV.push_back(stoi(winningS));
+        }
+
+        int winningNumbers = 0;
+
+        for (int number : numbersV)
+        {
+            if (contains(winningsV, number))
             {
                 winningNumbers++;
             }
@@ -50,7 +51,9 @@ int main()
         for (size_t i = lineId + 1; i < lineId + winningNumbers + 1; i++)
         {
             if (i < size)
+            {
                 copies[i] += copies[lineId];
+            }
         }
 
         lineId++;

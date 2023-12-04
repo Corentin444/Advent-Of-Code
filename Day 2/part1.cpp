@@ -16,8 +16,7 @@ int main()
     for(std::string line : readLines("input.txt"))
     {
         possible = true;
-        std::regex word_regex("([0-9]+\\sr)|([0-9]+\\sg)|([0-9]+\\sb)");
-        for (std::string s : split(line, word_regex))
+        for (std::string s : getRegexMatches(line, "([0-9]+\\sr)|([0-9]+\\sg)|([0-9]+\\sb)"))
         {
             int n = std::stoi(s.substr(0, s.size() - 2));
             std::string color = s.substr(s.size() - 1);

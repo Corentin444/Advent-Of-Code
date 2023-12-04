@@ -7,7 +7,7 @@
 #include <fstream>
 
 // Split a string by a delimiter
-std::vector<std::string> split(std::string s, std::string delimiter)
+std::vector<std::string> splitByString(std::string s, std::string delimiter)
 {
     size_t pos;
     std::vector<std::string> splitted;
@@ -21,18 +21,34 @@ std::vector<std::string> split(std::string s, std::string delimiter)
 }
 
 // Split a string by a regex
-std::vector<std::string> split(std::string s, std::regex word_regex)
+std::vector<std::string> splitByRegex(std::string s, std::string regex)
 {
+    std::regex split_regex(regex);
     std::vector<std::string> splitted;
-    auto words_begin = std::sregex_iterator(s.begin(), s.end(), word_regex);
+    std::sregex_token_iterator words_begin = std::sregex_token_iterator(s.begin(), s.end(), split_regex, -1);
+    std::sregex_token_iterator words_end = std::sregex_token_iterator();
+    for (std::sregex_token_iterator i = words_begin; i != words_end; ++i)
+    {
+        std::string match_string = *i;
+        splitted.push_back(match_string);
+    }
+    return splitted;
+}
+
+// Get all regex matches in a string
+std::vector<std::string> getRegexMatches(std::string s, std::string regex)
+{
+    std::regex match_regex(regex);
+    std::vector<std::string> matches;
+    auto words_begin = std::sregex_iterator(s.begin(), s.end(), match_regex);
     auto words_end = std::sregex_iterator();
     for (std::sregex_iterator i = words_begin; i != words_end; ++i)
     {
         std::smatch match = *i;
         std::string match_string = match.str();
-        splitted.push_back(match_string);
+        matches.push_back(match_string);
     }
-    return splitted;
+    return matches;
 }
 
 // Read lines from a file
@@ -65,4 +81,10 @@ std::vector<std::vector<char>> readChars(std::string fileName)
         i++;
     }
     return chars;
+}
+
+template <typename T>
+bool contains(std::vector<T> haystack, T needle)
+{
+    return std::find(haystack.begin(), haystack.end(), needle) != haystack.end();
 }
