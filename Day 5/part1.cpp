@@ -11,15 +11,18 @@
 
 int main()
 {
-    int ans = 0;
+    long long ans = 0;
     std::vector<std::string> lines = readLines("input.txt");
-    std::vector<std::pair<int, int>> srcDes;
+    std::vector<long long> numbers;
+    std::vector<bool> done;
     for (std::string s : splitByString(splitByString(lines[0], ": ")[1], " "))
     {
         if (s != "")
         {
-            std::pair<int, int> a(0, std::stoi(s));
-            srcDes.push_back(a);
+            std::cout << s << "\n";
+            std::cout << std::stoll(s) << "\n";
+            numbers.push_back(std::stoll(s));
+            done.push_back(false);
         }
     }
 
@@ -35,43 +38,41 @@ int main()
         if (line.find(":") != std::string::npos)
         {
             // nouvelle ligne
-            for (std::pair<int, int> pair : srcDes)
+            for (size_t i = 0; i < done.size(); i++)
             {
-                int tmp = pair.first;
-                pair.first = pair.second;
-                pair.second = tmp;
+                done[i] = false;
             }
-
-            std::cout << " Destinations : ";
-            for (std::pair<int, int> pair : srcDes)
-            {
-                std::cout << pair.second << " ";
-            }
-            std::cout << "\n Sources : ";
-            for (std::pair<int, int> pair : srcDes)
-            {
-                std::cout << pair.first << " ";
-            }
-            std::cout << "\n" << line << "\n";
         }
         else
         {
             // ligne avec nombres
-            int destStart = std::stoi(splitByString(line, " ")[0]);
-            int srcStart = std::stoi(splitByString(line, " ")[1]);
-            int rangeLength = std::stoi(splitByString(line, " ")[2]);
-            for (std::pair<int, int> pair : srcDes)
+            long long destStart = std::stoll(splitByString(line, " ")[0]);
+            long long srcStart = std::stoll(splitByString(line, " ")[1]);
+            long long rangeLength = std::stoll(splitByString(line, " ")[2]);
+            for (size_t i = 0; i < numbers.size(); i++)
             {
-                if (pair.first >= srcStart && pair.first < srcStart + rangeLength)
+                long long number = numbers[i];
+                bool aa = done[i];
+                if (!aa && number >= srcStart && number < srcStart + rangeLength)
                 {
-                    pair.second = destStart + pair.first - srcStart;
+                    numbers[i] = destStart + number - srcStart;
+                    done[i] = true;
                 }
+            }
+            for (size_t i = 0; i < numbers.size(); i++)
+            {
+                long long number = numbers[i];
             }
         }
     }
 
-    for (std::pair<int, int> pair : srcDes)
+    long long min = numbers[0];
+    for (size_t i = 0; i < numbers.size(); i++)
     {
-        std::cout << pair.second << "\n";
+        if (numbers[i] < min)
+        {
+            min = numbers[i];
+        }
     }
+    std::cout << min;
 }
