@@ -88,3 +88,16 @@ bool contains(std::vector<T> haystack, T needle)
 {
     return std::find(haystack.begin(), haystack.end(), needle) != haystack.end();
 }
+
+template <typename T>
+int getPosition(std::vector<T> haystack, T needle)
+{
+    for (size_t i = 0; i < haystack.size(); i++)
+    {
+        if (haystack[i] == needle)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
