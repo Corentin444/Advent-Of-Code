@@ -10,7 +10,9 @@
 
 #include "../utils.h"
 
-int getSteps(std::map<std::string, std::pair<std::string, std::string>> nodes, std::string directions, std::string cur)
+using namespace std;
+
+int getSteps(map<string, pair<string, string>> nodes, string directions, string cur)
 {
     int steps = 0;
     while (cur.at(2) != 'Z')
@@ -32,18 +34,18 @@ int main()
 {
     long long ans = 0;
 
-    std::map<std::string, std::pair<std::string, std::string>> nodes;
-    std::vector<std::string> lines = readLines("input.txt");
-    std::string directions = lines[0];
-    std::vector<std::string> cur_nodes;
+    map<string, pair<string, string>> nodes;
+    vector<string> lines = readLines("input.txt");
+    string directions = lines[0];
+    vector<string> cur_nodes;
 
     for (size_t i = 2; i < lines.size(); i++)
     {
-        std::string line = lines[i];
-        std::string node = line.substr(0, 3);
-        std::string left = line.substr(7, 3);
-        std::string right = line.substr(12, 3);
-        std::pair<std::string, std::string> pair(left, right);
+        string line = lines[i];
+        string node = line.substr(0, 3);
+        string left = line.substr(7, 3);
+        string right = line.substr(12, 3);
+        pair<string, string> pair(left, right);
         nodes[node] = pair;
         if (node.at(2) == 'A')
         {
@@ -51,8 +53,8 @@ int main()
         }
     }
 
-    std::vector<int> steps;
-    for (std::string cur : cur_nodes)
+    vector<int> steps;
+    for (string cur : cur_nodes)
     {
         steps.push_back(getSteps(nodes, directions, cur));
     }
@@ -60,8 +62,8 @@ int main()
     ans = steps[0];
     for (auto step : steps)
     {
-        ans = std::lcm(ans, step);
+        ans = lcm(ans, step);
     }
 
-    std::cout << ans;
+    cout << ans;
 }

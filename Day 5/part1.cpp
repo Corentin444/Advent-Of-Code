@@ -9,33 +9,35 @@
 
 #include "../utils.h"
 
+using namespace std;
+
 int main()
 {
     long long ans = 0;
-    std::vector<std::string> lines = readLines("input.txt");
-    std::vector<long long> numbers;
-    std::vector<bool> done;
-    for (std::string s : splitByString(splitByString(lines[0], ": ")[1], " "))
+    vector<string> lines = readLines("input.txt");
+    vector<long long> numbers;
+    vector<bool> done;
+    for (string s : splitByString(splitByString(lines[0], ": ")[1], " "))
     {
         if (s != "")
         {
-            std::cout << s << "\n";
-            std::cout << std::stoll(s) << "\n";
-            numbers.push_back(std::stoll(s));
+            cout << s << "\n";
+            cout << stoll(s) << "\n";
+            numbers.push_back(stoll(s));
             done.push_back(false);
         }
     }
 
     for (size_t i = 2; i < lines.size(); i++)
     {
-        std::string line = lines[i];
+        string line = lines[i];
         if (line == "")
         {
             // ligne vide
             continue;
         }
 
-        if (line.find(":") != std::string::npos)
+        if (line.find(":") != string::npos)
         {
             // nouvelle ligne
             for (size_t i = 0; i < done.size(); i++)
@@ -46,9 +48,9 @@ int main()
         else
         {
             // ligne avec nombres
-            long long destStart = std::stoll(splitByString(line, " ")[0]);
-            long long srcStart = std::stoll(splitByString(line, " ")[1]);
-            long long rangeLength = std::stoll(splitByString(line, " ")[2]);
+            long long destStart = stoll(splitByString(line, " ")[0]);
+            long long srcStart = stoll(splitByString(line, " ")[1]);
+            long long rangeLength = stoll(splitByString(line, " ")[2]);
             for (size_t i = 0; i < numbers.size(); i++)
             {
                 long long number = numbers[i];
@@ -74,5 +76,5 @@ int main()
             min = numbers[i];
         }
     }
-    std::cout << min;
+    cout << min;
 }

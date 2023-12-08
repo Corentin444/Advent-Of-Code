@@ -9,15 +9,17 @@
 
 #include "../utils.h"
 
+using namespace std;
+
 int main()
 {
     int ans = 0;
-    std::vector<std::vector<char>> grid = readChars("input.txt");
-    std::vector<std::vector<int>> dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    vector<vector<char>> grid = readChars("input.txt");
+    vector<vector<int>> dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
     
     for (size_t x = 0; x < grid.size(); x++)
     {
-        std::string n = "";
+        string n = "";
         bool symbol = false;
         for (size_t y = 0; y < grid[0].size(); y++)
         {
@@ -43,7 +45,7 @@ int main()
             {
                 if (n != "" && symbol)
                 {
-                    ans += std::stoi(n);
+                    ans += stoi(n);
                 }
                 n = "";
                 symbol = false;
@@ -52,9 +54,9 @@ int main()
 
         if (n != "" && symbol)
         {
-            ans += std::stoi(n);
+            ans += stoi(n);
         }
     }
 
-    std::cout << ans;
+    cout << ans;
 }

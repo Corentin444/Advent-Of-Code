@@ -9,17 +9,19 @@
 
 #include "../utils.h"
 
+using namespace std;
+
 int main()
 {
     int ans = 0;
 
-    std::vector<std::vector<char>> grid = readChars("input.txt");
-    std::vector<std::vector<int>> dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-    std::map<std::pair<int, int>, std::vector<int>> gears;
+    vector<vector<char>> grid = readChars("input.txt");
+    vector<vector<int>> dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    map<pair<int, int>, vector<int>> gears;
 
     for (size_t x = 0; x < grid.size(); x++)
     {
-        std::string n = "";
+        string n = "";
         bool gear = false;
         int gearX = -1;
         int gearY = -1;
@@ -47,8 +49,8 @@ int main()
             {
                 if (n != "" && gear)
                 {
-                    std::pair<int, int> gearPos(gearX, gearY);
-                    gears[gearPos].push_back(std::stoi(n));
+                    pair<int, int> gearPos(gearX, gearY);
+                    gears[gearPos].push_back(stoi(n));
                 }
                 n = "";
                 gear = false;
@@ -59,8 +61,8 @@ int main()
 
         if (n != "" && gear)
         {
-            std::pair<int, int> gearPos(gearX, gearY);
-            gears[gearPos].push_back(std::stoi(n));
+            pair<int, int> gearPos(gearX, gearY);
+            gears[gearPos].push_back(stoi(n));
         }
     }
 
@@ -71,5 +73,5 @@ int main()
             ans += val[0] * val[1];
         }
     }
-    std::cout << ans;
+    cout << ans;
 }

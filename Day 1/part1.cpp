@@ -6,11 +6,13 @@
 
 #include "../utils.h"
 
+using namespace std;
+
 int main()
 {
     int sum = 0;
-    std::vector<int> numbers;
-    for(std::string line : readLines("input.txt"))
+    vector<int> numbers;
+    for(string line : readLines("input.txt"))
     {
         for (char c : line)
         {
@@ -23,5 +25,5 @@ int main()
         numbers = {};
     }
 
-    std::cout << sum;
+    cout << sum;
 }

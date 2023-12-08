@@ -9,21 +9,23 @@
 
 #include "../utils.h"
 
+using namespace std;
+
 int main()
 {
     int ans = 1;
 
-    std::vector<int> times;
-    std::vector<int> distances;
-    std::vector<std::string> lines = readLines("input.txt");
-    for (std::string s : getRegexMatches(lines[0], "\\d+"))
+    vector<int> times;
+    vector<int> distances;
+    vector<string> lines = readLines("input.txt");
+    for (string s : getRegexMatches(lines[0], "\\d+"))
     {
-        times.push_back(std::stoi(s));
+        times.push_back(stoi(s));
     }
 
-    for (std::string s : getRegexMatches(lines[1], "\\d+"))
+    for (string s : getRegexMatches(lines[1], "\\d+"))
     {
-        distances.push_back(std::stoi(s));
+        distances.push_back(stoi(s));
     }
 
     // Pour chaque course
@@ -41,10 +43,10 @@ int main()
         }
         if (n > 0)
         {
-            std::cout << n << "\n";
+            cout << n << "\n";
             ans = ans * n;
         }
     }
 
-    std::cout << ans;
+    cout << ans;
 }

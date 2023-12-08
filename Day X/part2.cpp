@@ -4,28 +4,29 @@
 #include <string>
 #include <regex>
 #include <map>
+#include <numeric>
 #include <algorithm>
 #include <utility>
 
 #include "../utils.h"
 
+using namespace std;
 int main()
 {
     int ans = 0;
 
-    for (std::string line : readLines("input.txt"))
+    for (string line : readLines("input.txt"))
     {
-        std::vector<std::string> splited = splitByString(line, " ");
+        vector<string> splited = splitByString(line, " ");
     }
 
-    std::vector<std::vector<char>> grid = readChars("input.txt");
+    vector<vector<char>> grid = readChars("input.txt");
     for (size_t x = 0; x < grid.size(); x++)
     {
         for (size_t y = 0; y < grid[0].size(); y++)
         {
-            
         }
     }
 
-    std::cout << ans;
+    cout << ans;
 }
