@@ -10,6 +10,24 @@
 
 #include "../utils.h"
 
+int getSteps(std::map<std::string, std::pair<std::string, std::string>> nodes, std::string directions, std::string cur)
+{
+    int steps = 0;
+    while (cur.at(2) != 'Z')
+    {
+        if (directions.at(steps % directions.size()) == 'L')
+        {
+            cur = nodes[cur].first;
+        }
+        else
+        {
+            cur = nodes[cur].second;
+        }
+        steps++;
+    }
+    return steps;
+}
+
 int main()
 {
     long long ans = 0;
@@ -33,35 +51,17 @@ int main()
         }
     }
 
-    int n = 0;
-    int pos = 0;
     std::vector<int> steps;
-    bool finish = false;
-    for(auto cur : cur_nodes)
+    for (std::string cur : cur_nodes)
     {
-        while(cur.at(2) != 'Z')
-        {
-            if(directions.at(pos) == 'L')
-            {
-                cur = nodes[cur].first;
-            } else {
-                cur = nodes[cur].second;
-            }
-            pos++;
-            pos = pos % directions.size();
-            n++;
-        }
-        steps.push_back(n);
-        n = 0;
-        pos = 0;
+        steps.push_back(getSteps(nodes, directions, cur));
     }
 
     ans = steps[0];
-    for (auto step: steps)
+    for (auto step : steps)
     {
         ans = std::lcm(ans, step);
     }
-   
 
     std::cout << ans;
 }

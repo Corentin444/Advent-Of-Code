@@ -28,20 +28,15 @@ int main()
     }
     
     std::string cur = "AAA";
-    int i = 0;
     while(cur != "ZZZ")
     {
-        // std::cout << cur << " + " << directions.at(i) << " = ";
-        if(directions.at(i) == 'L')
+        if(directions.at(ans % directions.size()) == 'L')
         {
             cur = nodes[cur].first;
         } else {
             cur = nodes[cur].second;
         }
         ans++;
-        // std::cout << cur << "\n";
-        i++;
-        i = i % directions.size();
     }
 
     std::cout << ans;
